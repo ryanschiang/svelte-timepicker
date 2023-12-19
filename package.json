@@ -1,5 +1,5 @@
 {
-	"name": "svelte-timepicker",
+	"name": "@rschiang/svelte-timepicker",
 	"version": "0.0.1",
 	"type": "module",
 	"license": "MIT",
