@@ -13,11 +13,11 @@ npm install @rschiang/svelte-timepicker
 ## Usage
 
 ```svelte
-<script lang="ts">
+<script>
     import { TimePicker } from "@rschiang/svelte-timepicker";
 
-    let hours: number | null = null;
-    let minutes: number | null = null;
+    let hours = null;
+    let minutes = null;
 </script>
 
 <TimePicker onChange={(h, m) => {

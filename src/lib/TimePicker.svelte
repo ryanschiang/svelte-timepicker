@@ -203,6 +203,7 @@
 		border: none;
 		font-size: 14px;
 		cursor: pointer;
+		color: black;
 	}
 
 	.popover_header_btn.active {
