@@ -36,6 +36,6 @@ npm install @rschiang/svelte-timepicker
 
 | Property | Type | Description |
 | ----------- | ----------- | ----------- |
-| hours? | `number | null` | Controls the hours value. |
-| minutes? | `number | null` | Controls the minutes value. | 
-| onChange? | `function | null` | Function with two parameters: `hours` and `minutes`. |
+| hours? | `number \| null` | Controls the hours value. |
+| minutes? | `number \| null` | Controls the minutes value. | 
+| onChange? | `function \| null` | Function with two parameters: `hours` and `minutes`. |
