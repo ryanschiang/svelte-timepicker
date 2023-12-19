@@ -2,7 +2,7 @@
 
 ## What is it?
 
-A simple time picker component for Svelte, inspired by Material UI's time picker.
+A very simple time picker component for Svelte, inspired by Material UI's time picker.
 
 ## Installation
 
@@ -25,3 +25,17 @@ npm install @rschiang/svelte-timepicker
     minutes = m;
 }} />
 ```
+
+## Demo
+
+[https://svelte.dev/repl/54e378a10dac4c8cabd9d938d40a9364?version=4.2.8](https://svelte.dev/repl/54e378a10dac4c8cabd9d938d40a9364?version=4.2.8)
+
+![Screenshot](./static/screenshot.png)
+
+## Properties
+
+| Property | Type | Description |
+| ----------- | ----------- | ----------- |
+| hours? | number | null | Controls the hours value. |
+| minutes? | number | null | Controls the minutes value. | 
+| onChange? | function | null | Function with two parameters: hours and minutes. |
