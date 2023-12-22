@@ -3,6 +3,15 @@
 	export let minutes: number | null = null;
 	export let onChange: (hours: number, minutes: number) => void = () => {};
 
+	export let containerClass = 'timepicker_container';
+	export let inputClass = 'timepicker_input';
+	export let popoverClass = 'timepicker_popover';
+	export let popoverHeaderClass = 'timepicker_popover_header';
+	export let popoverHeaderColClass = 'timepicker_popover_header_col';
+	export let popoverHeaderBtnClass = 'timepicker_popover_header_btn';
+	export let popoverFooterClass = 'timepicker_popover_footer';
+	export let popoverFooterBtnClass = 'timepicker_popover_footer_btn';
+
 	let isOpen = false;
 	let hoursCol: HTMLDivElement;
 	let minutesCol: HTMLDivElement;
@@ -77,14 +86,14 @@
 </script>
 
 <div
-	class="timepicker_container"
+	class={containerClass}
 	use:clickAway={() => {
 		isOpen = false;
 	}}
 >
 	<input
 		type="time"
-		class="timepicker_input"
+		class={inputClass}
 		on:input={(e) => {
 			const split = e.currentTarget.value.split(':');
 			hours = parseInt(split[0]);
@@ -99,13 +108,13 @@
 	/>
 
 	{#if isOpen}
-		<div class="timepicker_popover">
-			<div class="timepicker_popover_header">
-				<div bind:this={hoursCol} class="timepicker_popover_header_col">
+		<div class={popoverClass}>
+			<div class={popoverHeaderClass}>
+				<div bind:this={hoursCol} class={popoverHeaderColClass}>
 					{#each Array.from(Array(12)) as _, hour}
 						<button
 							id={`hour-${hour + 12 > 12 ? hour : hour + 12}`}
-							class="timepicker_popover_header_btn"
+							class={popoverHeaderBtnClass}
 							class:active={hours === 0
 								? hour === 0
 								: hours &&
@@ -116,11 +125,11 @@
 						</button>
 					{/each}
 				</div>
-				<div bind:this={minutesCol} class="timepicker_popover_header_col">
+				<div bind:this={minutesCol} class={popoverHeaderColClass}>
 					{#each Array.from(Array(12)) as _, min}
 						<button
 							id={`min-${min * 5}`}
-							class="timepicker_popover_header_btn"
+							class={popoverHeaderBtnClass}
 							class:active={minutes === min * 5}
 							on:click={() => handleMinutesClick(min)}
 						>
@@ -128,16 +137,16 @@
 						</button>
 					{/each}
 				</div>
-				<div class="timepicker_popover_header_col">
+				<div class={popoverHeaderColClass}>
 					<button
-						class="timepicker_popover_header_btn"
+						class={popoverHeaderBtnClass}
 						class:active={hours !== null && minutes !== null && hours < 12}
 						on:click={handleAMClick}
 					>
 						AM
 					</button>
 					<button
-						class="timepicker_popover_header_btn"
+						class={popoverHeaderBtnClass}
 						class:active={hours !== null && minutes !== null && hours >= 12}
 						on:click={handlePMClick}
 					>
@@ -145,9 +154,9 @@
 					</button>
 				</div>
 			</div>
-			<div class="timepicker_popover_footer">
+			<div class={popoverFooterClass}>
 				<button
-					class="timepicker_popover_footer_btn"
+					class={popoverFooterBtnClass}
 					on:click={() => {
 						isOpen = false;
 					}}>OK</button

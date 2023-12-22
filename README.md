@@ -39,6 +39,14 @@ npm install @rschiang/svelte-timepicker
 | hours? | `number \| null` | Controls the hours value. |
 | minutes? | `number \| null` | Controls the minutes value. | 
 | onChange? | `function \| null` | Function with two parameters: `hours` and `minutes`. |
+| containerClass? | `string` | Class name for the container element. |
+| inputClass? | `string` | Class name for the input element. |
+| popoverClass? | `string` | Class name for the popover element. |
+| popoverHeaderClass? | `string` | Class name for the popover header element. |
+| popoverHeaderColClass? | `string` | Class name for the popover header column element. |
+| popoverHeaderBtnClass? | `string` | Class name for the popover header button element. |
+| popoverFooterClass? | `string` | Class name for the popover footer element. |
+| popoverFooterBtnClass? | `string` | Class name for the popover footer button element. |
 
 ## License
 
