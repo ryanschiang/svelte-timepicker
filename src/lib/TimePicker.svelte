@@ -7,7 +7,7 @@
 
 	export let onChange: (hours: number, minutes: number) => void = () => {};
 
-	function clickAway(node: HTMLElement, callbackFunction: () => void) {
+	const clickAway = (node: HTMLElement, callbackFunction: () => void) => {
 		function onClick(event: MouseEvent) {
 			if (!node.contains(event.target as Node)) {
 				callbackFunction();
@@ -24,7 +24,7 @@
 				document.body.removeEventListener('click', onClick);
 			}
 		};
-	}
+	};
 
 	const addLeadingZero = (num: number | null) => {
 		if (num === null) return '';
