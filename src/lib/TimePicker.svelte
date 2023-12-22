@@ -44,6 +44,30 @@
 		}
 	};
 
+	$: handleHoursClick = (hour: number) => {
+		if (hours === null) {
+			hours = hour + 12 > 12 ? hour : hour + 12;
+		} else {
+			if (hours >= 12) {
+				hours = hour + 12;
+			} else {
+				hours = hour;
+			}
+		}
+	};
+
+	$: handleMinutesClick = (min: number) => {
+		minutes = min * 5;
+	};
+
+	$: handleAMClick = () => {
+		hours = hours !== null && hours >= 12 ? hours - 12 : hours;
+	};
+
+	$: handlePMClick = () => {
+		hours = hours !== null && hours < 12 ? hours + 12 : hours;
+	};
+
 	$: {
 		if (hours !== null && minutes !== null) {
 			onChange(hours, minutes);
@@ -86,17 +110,7 @@
 								? hour === 0
 								: hours &&
 									(hours > 12 ? hours - 12 : hours) === (hour + 12 > 12 ? hour : hour + 12)}
-							on:click={() => {
-								if (hours === null) {
-									hours = hour + 12 > 12 ? hour : hour + 12;
-								} else {
-									if (hours >= 12) {
-										hours = hour + 12;
-									} else {
-										hours = hour;
-									}
-								}
-							}}
+							on:click={() => handleHoursClick(hour)}
 						>
 							{hour + 12 > 12 ? addLeadingZero(hour) : addLeadingZero(hour + 12)}
 						</button>
@@ -108,9 +122,7 @@
 							id={`min-${min * 5}`}
 							class="popover_header_btn"
 							class:active={minutes === min * 5}
-							on:click={() => {
-								minutes = min * 5;
-							}}
+							on:click={() => handleMinutesClick(min)}
 						>
 							{addLeadingZero(min * 5)}
 						</button>
@@ -120,18 +132,14 @@
 					<button
 						class="popover_header_btn"
 						class:active={hours !== null && minutes !== null && hours < 12}
-						on:click={() => {
-							hours = hours !== null && hours >= 12 ? hours - 12 : hours;
-						}}
+						on:click={handleAMClick}
 					>
 						AM
 					</button>
 					<button
 						class="popover_header_btn"
 						class:active={hours !== null && minutes !== null && hours >= 12}
-						on:click={() => {
-							hours = hours !== null && hours <= 12 ? hours + 12 : hours;
-						}}
+						on:click={handlePMClick}
 					>
 						PM
 					</button>
