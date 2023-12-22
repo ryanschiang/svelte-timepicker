@@ -5,7 +5,7 @@
 	let hoursCol: HTMLDivElement;
 	let minutesCol: HTMLDivElement;
 
-	export let onChange = (hours: number, minutes: number) => {};
+	export let onChange: (hours: number, minutes: number) => void = () => {};
 
 	function clickAway(node: HTMLElement, callbackFunction: () => void) {
 		function onClick(event: MouseEvent) {
