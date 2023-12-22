@@ -1,11 +1,11 @@
 <script lang="ts">
 	export let hours: number | null = null;
 	export let minutes: number | null = null;
+	export let onChange: (hours: number, minutes: number) => void = () => {};
+
 	let isOpen = false;
 	let hoursCol: HTMLDivElement;
 	let minutesCol: HTMLDivElement;
-
-	export let onChange: (hours: number, minutes: number) => void = () => {};
 
 	const clickAway = (node: HTMLElement, callbackFunction: () => void) => {
 		function onClick(event: MouseEvent) {
@@ -77,14 +77,14 @@
 </script>
 
 <div
-	class="container"
+	class="timepicker_container"
 	use:clickAway={() => {
 		isOpen = false;
 	}}
 >
 	<input
 		type="time"
-		class="input"
+		class="timepicker_input"
 		on:input={(e) => {
 			const split = e.currentTarget.value.split(':');
 			hours = parseInt(split[0]);
@@ -92,20 +92,20 @@
 			minutes = parseInt(split[1]);
 			if (isNaN(minutes)) minutes = null;
 		}}
-		on:focus={(e) => {
+		on:focus={() => {
 			isOpen = true;
 		}}
 		value="{addLeadingZero(hours)}:{addLeadingZero(minutes)}"
 	/>
 
 	{#if isOpen}
-		<div class="popover">
-			<div class="popover_header">
-				<div bind:this={hoursCol} class="popover_header_col">
+		<div class="timepicker_popover">
+			<div class="timepicker_popover_header">
+				<div bind:this={hoursCol} class="timepicker_popover_header_col">
 					{#each Array.from(Array(12)) as _, hour}
 						<button
 							id={`hour-${hour + 12 > 12 ? hour : hour + 12}`}
-							class="popover_header_btn"
+							class="timepicker_popover_header_btn"
 							class:active={hours === 0
 								? hour === 0
 								: hours &&
@@ -116,11 +116,11 @@
 						</button>
 					{/each}
 				</div>
-				<div bind:this={minutesCol} class="popover_header_col">
+				<div bind:this={minutesCol} class="timepicker_popover_header_col">
 					{#each Array.from(Array(12)) as _, min}
 						<button
 							id={`min-${min * 5}`}
-							class="popover_header_btn"
+							class="timepicker_popover_header_btn"
 							class:active={minutes === min * 5}
 							on:click={() => handleMinutesClick(min)}
 						>
@@ -128,16 +128,16 @@
 						</button>
 					{/each}
 				</div>
-				<div class="popover_header_col">
+				<div class="timepicker_popover_header_col">
 					<button
-						class="popover_header_btn"
+						class="timepicker_popover_header_btn"
 						class:active={hours !== null && minutes !== null && hours < 12}
 						on:click={handleAMClick}
 					>
 						AM
 					</button>
 					<button
-						class="popover_header_btn"
+						class="timepicker_popover_header_btn"
 						class:active={hours !== null && minutes !== null && hours >= 12}
 						on:click={handlePMClick}
 					>
@@ -145,9 +145,9 @@
 					</button>
 				</div>
 			</div>
-			<div class="popover_footer">
+			<div class="timepicker_popover_footer">
 				<button
-					class="popover_footer_btn"
+					class="timepicker_popover_footer_btn"
 					on:click={() => {
 						isOpen = false;
 					}}>OK</button
@@ -158,14 +158,14 @@
 </div>
 
 <style>
-	.container {
+	.timepicker_container {
 		position: relative;
 		display: inline-block;
 		width: 100%;
 		max-width: 20rem;
 	}
 
-	.input {
+	.timepicker_input {
 		padding: 0.375rem 0.5rem;
 		width: 100%;
 		max-width: 20rem;
@@ -175,12 +175,12 @@
 		font-size: 14px;
 	}
 
-	.input:focus {
+	.timepicker_input:focus {
 		border-color: blue;
 		outline: 1px solid blue;
 	}
 
-	.popover {
+	.timepicker_popover {
 		background: white;
 		position: absolute;
 		z-index: 10;
@@ -188,12 +188,12 @@
 		border: 1px solid #ccc;
 	}
 
-	.popover_header {
+	.timepicker_popover_header {
 		display: flex;
 		flex-direction: row;
 	}
 
-	.popover_header_col {
+	.timepicker_popover_header_col {
 		display: flex;
 		flex-direction: column;
 		padding: 0.5rem 0.325rem;
@@ -201,11 +201,11 @@
 		overflow-y: scroll;
 	}
 
-	.popover_header_col:not(:last-child) {
+	.timepicker_popover_header_col:not(:last-child) {
 		border-right: 1px solid #ccc;
 	}
 
-	.popover_header_btn {
+	.timepicker_popover_header_btn {
 		padding: 0.5rem 1rem;
 		background: transparent;
 		border: none;
@@ -214,22 +214,22 @@
 		color: black;
 	}
 
-	.popover_header_btn.active {
+	.timepicker_popover_header_btn.active {
 		background: #165fc7;
 		color: white;
 	}
-	.popover_header_btn:not(.active):hover {
+	.timepicker_popover_header_btn:not(.active):hover {
 		background: hsl(0, 0%, 93%);
 	}
 
-	.popover_footer {
+	.timepicker_popover_footer {
 		display: flex;
 		justify-content: flex-end;
 		padding: 0.5rem 1rem;
 		border-top: 1px solid #ccc;
 	}
 
-	.popover_footer_btn {
+	.timepicker_popover_footer_btn {
 		color: blue;
 		font-weight: 500;
 		background: transparent;
